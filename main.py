@@ -100,6 +100,8 @@ if __name__ == '__main__':
 	sct = max(ind_vm_ct)
 	fct = min(x for x in ind_vm_ct if x > 0)
 	act = sum(ind_vm_ct) / len(ind_vm_ct)
+	arur = act / sct
+	tpt = gcs.N_CLOUDLETS / sct
 
 	print("\n==============================================\n")
 
@@ -111,9 +113,28 @@ if __name__ == '__main__':
 	if gcs.N_VMS <= 20:
 		print(f"FITTEST INDIVIDUAL COMPLETION TIME FOR EACH VM IN SECONDS {ind_vm_ct}")
 	print(f"FITNESS HISTORY {fitness_track}")
+
+	print("\n==============================================\n")
+
+	print("Metrics for Schedule.")
+
+	print("")
+
+	print("Fastest Completion Time represents which VM will finish first and time taken. Lower is better.")
+	print("Slowest Completion Time represents which VM will finish last and time taken. Lower is better.")
+	print("Average Completion Time represents the average time each VM is taking to finish. Lower is better.")
+	print("Average Resource Utilization (ARUR) is the average use of each resource. Higher is better.")
+	print("Troughput is the jobs finished per unit time. Higher is better.")
+	print("Makespan is again the slowest time taken by a VM to finish, lower is better.")
+
+	print("")
+
 	print(f"FITTEST INDIVIDUAL SLOWEST COMPLETION TIME: {sct}")
 	print(f"FITTEST INDIVIDUAL FASTEST COMPLETION TIME: {fct}")
 	print(f"FITTEST INDIVIDUAL AVERAGE COMPLETION TIME: {act}")
+	print(f"ARUR (Average Resource Utilization): {arur}")
+	print(f"THROUGHPUT: {tpt}")
+	print(f"MAKESPAN: {sct}")
 
 	print("\n==============================================\n")
 	
@@ -125,10 +146,15 @@ if __name__ == '__main__':
 	rsct = max(rind_vm_ct)
 	rfct = min(x for x in rind_vm_ct if x > 0)
 	ract = sum(rind_vm_ct) / len(rind_vm_ct)
+	rarur = ract / rsct
+	rtpt = gcs.N_CLOUDLETS / rsct
 
 	print(f"FITTEST INDIVIDUAL SLOWEST COMPLETION TIME: {rsct}")
 	print(f"FITTEST INDIVIDUAL FASTEST COMPLETION TIME: {rfct}")
 	print(f"FITTEST INDIVIDUAL AVERAGE COMPLETION TIME: {ract}")
+	print(f"ARUR (Average Resource Utilization): {rarur}")
+	print(f"THROUGHPUT: {rtpt}")
+	print(f"MAKESPAN: {rsct}")
 
 	print("\nRound Robin (RR) Algorithm")
 
@@ -136,10 +162,15 @@ if __name__ == '__main__':
 	rrsct = max(rrind_vm_ct)
 	rrfct = min(x for x in rrind_vm_ct if x > 0)
 	rract = sum(rrind_vm_ct) / len(rrind_vm_ct)
+	rrarur = rract / rrsct
+	rrtpt = gcs.N_CLOUDLETS / rrsct
 
 	print(f"FITTEST INDIVIDUAL SLOWEST COMPLETION TIME: {rrsct}")
 	print(f"FITTEST INDIVIDUAL FASTEST COMPLETION TIME: {rrfct}")
 	print(f"FITTEST INDIVIDUAL AVERAGE COMPLETION TIME: {rract}")
+	print(f"ARUR (Average Resource Utilization): {rrarur}")
+	print(f"THROUGHPUT: {rrtpt}")
+	print(f"MAKESPAN: {rrsct}")
 
 	print("\nMinumum Completion Time (MCT) Algorithm")
 
@@ -147,10 +178,15 @@ if __name__ == '__main__':
 	msct = max(mind_vm_ct)
 	mfct = min(x for x in mind_vm_ct if x > 0)
 	mact = sum(mind_vm_ct) / len(mind_vm_ct)
+	marur = mact / msct
+	mtpt = gcs.N_CLOUDLETS / msct
 	
 	print(f"FITTEST INDIVIDUAL SLOWEST COMPLETION TIME: {msct}")
 	print(f"FITTEST INDIVIDUAL FASTEST COMPLETION TIME: {mfct}")
 	print(f"FITTEST INDIVIDUAL AVERAGE COMPLETION TIME: {mact}")
+	print(f"ARUR (Average Resource Utilization): {marur}")
+	print(f"THROUGHPUT: {mtpt}")
+	print(f"MAKESPAN: {msct}")
 
 	print("\nMin-Min Algorithm")
 
@@ -158,38 +194,72 @@ if __name__ == '__main__':
 	mmnsct = max(mmnind_vm_ct)
 	mmnfct = min(x for x in mmnind_vm_ct if x > 0)
 	mmnact = sum(mmnind_vm_ct) / len(mmnind_vm_ct)
+	mmnarur = mmnact / mmnsct
+	mmntpt = gcs.N_CLOUDLETS / mmnsct
 	
 	print(f"FITTEST INDIVIDUAL SLOWEST COMPLETION TIME: {mmnsct}")
 	print(f"FITTEST INDIVIDUAL FASTEST COMPLETION TIME: {mmnfct}")
 	print(f"FITTEST INDIVIDUAL AVERAGE COMPLETION TIME: {mmnact}")
+	print(f"ARUR (Average Resource Utilization): {mmnarur}")
+	print(f"THROUGHPUT: {mmntpt}")
+	print(f"MAKESPAN: {mmnsct}")
 
 	print("\n==============================================\n")
 
-	print("\nRatio of Genetic Algorithm to other algorithms. Generally, less than 1 means Genetic Algorithm is better, greater than 1 means other algorithm performed better while equal to 1 means that there is no benefit for choosing one or the other.\n")
-
-	print(f"GCS-RS SLOWEST COMPLETION TIME RATIO: {sct / rsct}")
-	print(f"GCS-RR SLOWEST COMPLETION TIME RATIO: {sct / rrsct}")
-	print(f"GCS-MCT SLOWEST COMPLETION TIME RATIO: {sct / msct}")
-	print(f"GCS-Min-MIN SLOWEST COMPLETION TIME RATIO: {sct / mmnsct}")
+	print("\nRatio of Genetic Algorithm to other algorithms.\n")
 
 	print("")
 
-	print(f"GCS-RS FASTEST COMPLETION TIME RATIO: {fct / rfct}")
-	print(f"GCS-RR FASTEST COMPLETION TIME RATIO: {fct / rrfct}")
-	print(f"GCS-MCT FASTEST COMPLETION TIME RATIO: {fct / mfct}")
-	print(f"GCS-Min-MIN FASTEST COMPLETION TIME RATIO: {fct / mmnfct}")
+	print("Slowest Completion Time Ratio. Less than 1 means GCS is better.")
+	print("Fastest Completion Time Ratio. Less than 1 means GCS is better.")
+	print("Fastest Completion Time Ratio. Less than 1 means GCS is better.")
+	print("ARUR Ratio. Greater than 1 means GCS is better.")
+	print("Throghput Ratio. Greater than 1 means GCS is better.")
+	print("Makespan Ratio. Less than 1 means GCS is better.")
+	
+	print("")
+
+	print(f"GCS-to-RS SLOWEST COMPLETION TIME RATIO: {sct / rsct}")
+	print(f"GCS-to-RR SLOWEST COMPLETION TIME RATIO: {sct / rrsct}")
+	print(f"GCS-to-MCT SLOWEST COMPLETION TIME RATIO: {sct / msct}")
+	print(f"GCS-to-MIN-MIN SLOWEST COMPLETION TIME RATIO: {sct / mmnsct}")
 
 	print("")
 
-	print(f"GCS-RS AVERAGE COMPLETION TIME RATIO: {act / ract}")
-	print(f"GCS-RR AVERAGE COMPLETION TIME RATIO: {act / rract}")
-	print(f"GCS-MCT AVERAGE COMPLETION TIME RATIO: {act / mact}")
-	print(f"GCS-Min-MIN AVERAGE COMPLETION TIME RATIO: {act / mmnact}")
+	print(f"GCS-to-RS FASTEST COMPLETION TIME RATIO: {fct / rfct}")
+	print(f"GCS-to-RR FASTEST COMPLETION TIME RATIO: {fct / rrfct}")
+	print(f"GCS-to-MCT FASTEST COMPLETION TIME RATIO: {fct / mfct}")
+	print(f"GCS-to-MIN-MIN FASTEST COMPLETION TIME RATIO: {fct / mmnfct}")
+
+	print("")
+
+	print(f"GCS-to-RS AVERAGE COMPLETION TIME RATIO: {act / ract}")
+	print(f"GCS-to-RR AVERAGE COMPLETION TIME RATIO: {act / rract}")
+	print(f"GCS-to-MCT AVERAGE COMPLETION TIME RATIO: {act / mact}")
+	print(f"GCS-to-MIN-MIN AVERAGE COMPLETION TIME RATIO: {act / mmnact}")
+
+	print("")
+
+	print(f"GCS-to-RS ARUR RATIO: {arur / rarur}")
+	print(f"GCS-to-RR ARUR RATIO: {arur / rrarur}")
+	print(f"GCS-to-MCT ARUR RATIO: {arur / marur}")
+	print(f"GCS-to-MIN-MIN ARUR RATIO: {arur / mmnarur}")
+
+	print("")
+
+	print(f"GCS-to-RS THROUGHPUT RATIO: {tpt / rtpt}")
+	print(f"GCS-to-RR THROUGHPUT RATIO: {tpt / rrtpt}")
+	print(f"GCS-to-MCT THROUGHPUT RATIO: {tpt / mtpt}")
+	print(f"GCS-to-MIN-MIN THROUGHPUT RATIO: {tpt / mmntpt}")
+
+	print("")
+
+	print(f"GCS-to-RS MAKESPAN RATIO: {sct / rsct}")
+	print(f"GCS-to-RR MAKESPAN RATIO: {sct / rrsct}")
+	print(f"GCS-to-MCT MAKESPAN RATIO: {sct / msct}")
+	print(f"GCS-to-MIN-MIN MAKESPAN RATIO: {sct / mmnsct}")
 
 	print("\n==============================================\n")
 
-	print("\nNote: Fastest Completion time is not the best metric, Slowest and Average Completion time are much better metrics for comparison.")
-	print("This is because the longer a virtual machines runs, it will consume more power, resulting in higher usage cost, billing and CO2 emmissions.")
-	print("Fastest Completion Time represents which VM will finish first and time taken.")
-	print("Slowest Completion Time represents which VM will finish last and time taken.")
-	print("Average Completion Time represents the average time each VM is taking to finish.")
+	print("\nNote: Fastest Completion time is not the best metric, Slowest, Average Completion time, ARUR, Throughput and Makespan are much better metrics for comparison.")
+	print("This is because the longer a virtual machines runs, the host machine will remained powered on and continue opeartions and consuming more power, resulting in higher usage cost, billing and CO2 emmissions.")
