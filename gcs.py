@@ -151,7 +151,7 @@ class GeneticCloudScheduling():
 		o2 = []
 		if self.CROSSOVER is Crossover.UNIFORM:
 			for i in range(len(p1)):
-				if random.randint(0,1):
+				if self.get_probability(self.CROSSOVER_RATE):
 					o1.append(p1[i])
 					o2.append(p2[i])
 				else:
