@@ -13,6 +13,7 @@ from crossover import Crossover
 from cloudlet import Cloudlet
 from vm import Vm
 
+random.seed(0)
 
 class GeneticCloudScheduling():
 
@@ -276,15 +277,14 @@ class GeneticCloudScheduling():
 	def selection(self) -> List[int]:
 		"""
 		Perform Tournament selection based on TOURNAMENT SIZE.
-		Individuals based that were selected based on ELITISM will be excluded.
 
 		:returns selection: List of selected individuals by index
 		"""
 
-		range_tournament = range(len(self.ELITISM), self.POPULATION_SIZE)
+		range_tournament = range(0, self.POPULATION_SIZE)
 		self.SELECTION = []
  
-		for _ in range(len(self.ELITISM), self.POPULATION_SIZE, 2):
+		for _ in range(0, self.POPULATION_SIZE, 2):
 
 			winner_a = None
 			winner_b = None
